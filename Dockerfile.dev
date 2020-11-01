@@ -1,0 +1,40 @@
+#one container for developerment, npm run start
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY ./package.json ./
+
+RUN npm install
+#caopy a snap shot 
+
+#although using volumns, still preserve this as a reminder for later
+COPY ./ ./ 
+
+CMD ["npm", "run", "start"]
+
+#custom file name by: -f specific file to build the image
+#docker build -f Dockerfile.dev .
+
+
+
+
+
+#or use docker volumn: set up a placeholder inside the container
+#reference to local machine(mapping between inside and outside of a container)
+#pwd - present working directory
+# -v /app/node_modules: without : -> no mapping 
+# -v $(pwd):/app map pwd into '/app' odlfer
+#docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app <container id>
+#docker run -it -p 3000:3000 -v /app/node_modules -v "%cd%":/app -e CHOKIDAR_USEPOLLING=true 3e4d3212f678
+
+
+#docker run -it -p 3000:3000 CONTAINER_ID
+#docker run -p 3000:3000 fa537b1ba83c
+
+#running test in a container -> in travis CI
+#docker run ca85e34fcf09 npm run test
+# add std in
+#docker run -it  ca85e34fcf09 npm run test
+
+#one container for production, npm run build
