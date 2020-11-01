@@ -16,10 +16,34 @@ script:
     #run one time only test, -e CI=true
     - docker run -e CI=true nathanwkwong/docker-react npm run test
 
+deploy:
+    #aws, digital ocean
+    provider: elasticbeanstalk
+    region: "us-east-1"
+    app: docker
+    env: "Docker-env"
+    #provide the name to take all files from github -> zip -> S3 bucket -> poke to elasticbeanstalk -> future deploy
+    #S3 bucket auto generated from elasticbeanstalk initialization
+    bucket_name: "elasticbeanstalk-us-east-1-403354037318"
+    #default path as app name
+    bucket_path: "docker"
+    #deploy only when push master
+    on: 
+        branch: master
+    access_key_id:
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_KEY
 
+    # -> IAM (manage api keys) -> Users -> username: docker-react-travis-ci
+    # -> Access type: Programmatic access
+    # access_key_id: $AWS_ACCESS_KEY
+    # secret_access_key: $AWS_SECRET_KEY
+    # attach existing policies directly
+    # search - beanstalk -> check AWSElasticBeanstalkFullAccess > next: Review
 
 #circle: Development -> testing -> Deployment
 
+#Docker within CI/CD:
 #github repo: 
   ##create a repo
   #get it to local
@@ -28,11 +52,27 @@ script:
 #master(
   #pull request and merge it to master -> 
 
-#-> test with Travis CI (.travis.yml)
+#-> test with Travis CI - .travis.yml
 #tell travis to copy a docker running
 #tell travis to build the image using Dockerfile.dev (running test)
 #tell travis how to run the test suite
 #tell travis how to deploy the code to AWS
 
-#-> auto deploy if test success to hosting provider -> AWS Hosting Elastic Beanstalk)
-#Docker in above flow: 
+#-> if test success to hosting provider -> auto deploy 
+#-> AWS Hosting Elastic Beanstalk - start with production docker instance
+# suitable for run one container at a time 
+
+#create application -> web app -> name: docker, platform: Docker, Application code: sample Application
+#AWS: elastic beanstalk(-> load balance -> route request to VM running docker[Docker Container[App]])
+#monitor traffic into VM -> (auto scale up)add more VMs for more traffic
+#->config Travis auto deploy to AWS after passing of test
+
+
+
+
+
+
+
+
+
+
