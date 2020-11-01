@@ -30,9 +30,8 @@ deploy:
     #deploy only when push master
     on: 
         branch: master
-    access_key_id:
-        access_key_id: $AWS_ACCESS_KEY
-        secret_access_key: $AWS_SECRET_KEY
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
 
     # -> IAM (manage api keys) -> Users -> username: docker-react-travis-ci
     # -> Access type: Programmatic access
