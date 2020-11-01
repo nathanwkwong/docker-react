@@ -1,0 +1,38 @@
+#sudo for using docker
+sudo: required
+services:
+    #install a copy of docker into the running container
+    - docker
+
+#run before test, build docker image before rung
+before_install:
+    #naming the image building as nathanwkwong/docker-react following Dockerfile.dev in ./
+    - docker build -t nathanwkwong/docker-react -f Dockerfile.dev .
+
+#command for run the test suit
+#return status code other than 0 -> tests failed
+#hand and wait for input in react test suit
+script:
+    #run one time only test, -e CI=true
+    - docker run -e CI=true nathanwkwong/docker-react npm run test
+
+
+
+#circle: Development -> testing -> Deployment
+
+#github repo: 
+  ##create a repo
+  #get it to local
+  #push it to remote repo
+#feature branches(pull it and push it to it)
+#master(
+  #pull request and merge it to master -> 
+
+#-> test with Travis CI (.travis.yml)
+#tell travis to copy a docker running
+#tell travis to build the image using Dockerfile.dev (running test)
+#tell travis how to run the test suite
+#tell travis how to deploy the code to AWS
+
+#-> auto deploy if test success to hosting provider -> AWS Hosting Elastic Beanstalk)
+#Docker in above flow: 

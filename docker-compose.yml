@@ -26,19 +26,19 @@ services:
             - CHOKIDAR_USEPOLLING=true
     #M2: start of second container at the same time
     #docker-compose up --build for new added container
-    tests:
-        build:
-            context: .
-            dockerfile: Dockerfile.dev
-        volumes: 
-            - /app/node_modules
-            - ./:/app
-        #overrider starting command
-        command: ["npm", "run", "test"]
-        stdin_open: true
-        restart: "no"
-        environment:
-            - CHOKIDAR_USEPOLLING=true
+    # tests:
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile.dev
+    #     volumes: 
+    #         - /app/node_modules
+    #         - ./:/app
+    #     #overrider starting command
+    #     command: ["npm", "run", "test"]
+    #     stdin_open: true
+    #     restart: "no"
+    #     environment:
+    #         - CHOKIDAR_USEPOLLING=true
 
 #M1: reuse container to run the updated test: 
 # docker exec -it f04ee94c42ab npm run test + rerun the test
