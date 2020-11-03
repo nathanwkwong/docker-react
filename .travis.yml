@@ -67,7 +67,7 @@ deploy:
 #->config Travis auto deploy to AWS after passing of test
 
 
-#not work after deploy because no port exposed as:
+#not work after deploy because no port exposed as: test
 #docker run -p 3000:3000 <container_id>
 
 
