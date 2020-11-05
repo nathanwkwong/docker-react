@@ -21,7 +21,7 @@ deploy:
     provider: elasticbeanstalk
     region: "us-east-1"
     app: Docker-small
-    env: "Docker-env"
+    env: "DockerSmall-env"
     #provide the name to take all files from github -> zip -> S3 bucket -> poke to elasticbeanstalk -> future deploy
     #check the exist of S3 bucket auto generated from elasticbeanstalk initialization
     bucket_name: "elasticbeanstalk-us-east-1-403354037318"
