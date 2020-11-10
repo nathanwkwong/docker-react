@@ -4,7 +4,7 @@ services:
     #install a copy of docker into the running container
     - docker
 
-#run before test, build docker image before rung
+#run before test, build docker image before run
 before_install:
     #naming the image building as nathanwkwong/docker-react following Dockerfile.dev in ./
     - docker build -t nathanwkwong/docker-react -f Dockerfile.dev .
@@ -16,17 +16,16 @@ script:
     #run one time only test, -e CI=true
     - docker run -e CI=true nathanwkwong/docker-react npm run test
 
-deploy:
-    #aws, digital ocean
+deploy: #aws, digital ocean
     provider: elasticbeanstalk
     region: "us-east-1"
-    app: docker
-    env: "Docker-env"
+    app: Docker-small
+    env: "DockerSmall-env"
     #provide the name to take all files from github -> zip -> S3 bucket -> poke to elasticbeanstalk -> future deploy
     #check the exist of S3 bucket auto generated from elasticbeanstalk initialization
     bucket_name: "elasticbeanstalk-us-east-1-403354037318"
     #default path as app name
-    bucket_path: "docker"
+    bucket_path: "Docker-small"
     #deploy only when push master
     on: 
         branch: master
