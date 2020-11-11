@@ -1,4 +1,5 @@
 #sudo for using docker
+language: generic
 sudo: required
 services:
     #install a copy of docker into the running container
@@ -18,12 +19,12 @@ script:
 
 deploy: #aws, digital ocean
     provider: elasticbeanstalk
-    region: "us-east-1"
+    region: "northeast-2"
     app: Docker-small
     env: "DockerSmall-env"
     #provide the name to take all files from github -> zip -> S3 bucket -> poke to elasticbeanstalk -> future deploy
     #check the exist of S3 bucket auto generated from elasticbeanstalk initialization
-    bucket_name: "elasticbeanstalk-us-east-1-403354037318"
+    bucket_name: "elasticbeanstalk-ap-northeast-2-403354037318"
     #default path as app name
     bucket_path: "Docker-small"
     #deploy only when push master
@@ -69,9 +70,11 @@ deploy: #aws, digital ocean
 #not work after deploy because no port exposed as:
 #docker run -p 3000:3000 <container_id>
 
+#use service to build image is no good
+#db connection, app dependencies
 
-
-
+#example
+#nginx -> FN + BN(Express + Redis <-> Worker) + DB(Postgres)
 
 
 
