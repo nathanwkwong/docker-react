@@ -19,7 +19,7 @@ script:
 
 deploy: #aws, digital ocean
     provider: elasticbeanstalk
-    region: "northeast-2"
+    region: "ap-northeast-2"
     app: Docker-small
     env: "DockerSmall-env"
     #provide the name to take all files from github -> zip -> S3 bucket -> poke to elasticbeanstalk -> future deploy
@@ -74,7 +74,7 @@ deploy: #aws, digital ocean
 #db connection, app dependencies
 
 #example
-#nginx -> FN + BN(Express + Redis <-> Worker) + DB(Postgres)
+#nginx -> FN + BN(Express + Redis <-> Worker[BN, watch Redis]) + DB(Postgres)
 
 
 
